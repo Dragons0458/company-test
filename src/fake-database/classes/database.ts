@@ -1,4 +1,6 @@
+import { HttpException } from '@nestjs/common';
 import { AnimalNode } from 'src/fake-database/interfaces/animal-node';
+import { v4 as uuidv4 } from 'uuid';
 
 export class Database {
   private data: AnimalNode = {
@@ -24,6 +26,14 @@ export class Database {
     }
   }
 
+  get currentAnimalNode(): AnimalNode {
+    return this.data;
+  }
+
+  static getUniqueIndex(): string {
+    return uuidv4();
+  }
+
   populateData(node: AnimalNode) {
     this.data = node;
 
@@ -32,24 +42,26 @@ export class Database {
 
   getNode(nodeId: string): AnimalNode {
     if (!this.indexedData.has(nodeId))
-      throw new Error("The node doesn't exists");
+      throw new HttpException("The node doesn't exists", 404);
 
     return this.indexedData.get(nodeId);
   }
 
   addNode(parentId: string, node: AnimalNode) {
     if (!this.indexedData.has(parentId))
-      throw new Error("The parent node doesn't exists");
+      throw new HttpException("The parent node doesn't exists", 404);
 
     const parentNode = this.indexedData.get(parentId);
 
     this.indexedParents.set(node.id, parentNode);
     this.indexData(node);
+
+    parentNode.children.push(node);
   }
 
   updateParentNode(nodeId: string, newParentId: string) {
     if (!this.indexedData.has(nodeId) || !this.indexedData.has(newParentId))
-      throw new Error("Some of the node ids don't exist");
+      throw new HttpException("Some of the node ids don't exist", 404);
 
     const currParentNode = this.indexedParents.get(nodeId);
     const currParentChildren = currParentNode.children;
@@ -76,7 +88,7 @@ export class Database {
 
   deleteNode(nodeId: string) {
     if (!this.indexedParents.has(nodeId))
-      throw new Error("The node doesn't exists");
+      throw new HttpException("The node doesn't exists", 404);
 
     const parentChildren = this.indexedParents.get(nodeId).children;
 
