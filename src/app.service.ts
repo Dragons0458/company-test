@@ -15,7 +15,7 @@ import { databaseInstance } from 'src/utils/fake-database';
 
 @Injectable()
 export class AppService implements BeforeApplicationShutdown {
-  //constructor(private readonly animalTreeService: AnimalTreeService) {}
+  constructor(private readonly animalTreeService: AnimalTreeService) {}
 
   private animalNodeToTreeNode(animalNode: AnimalNode): TreeNode {
     const node: Node = {
@@ -65,6 +65,6 @@ export class AppService implements BeforeApplicationShutdown {
   }
 
   async beforeApplicationShutdown(signal?: string) {
-    // await this.animalTreeService.insertData(databaseInstance.currentAnimalNode);
+    await this.animalTreeService.insertData(databaseInstance.currentAnimalNode);
   }
 }

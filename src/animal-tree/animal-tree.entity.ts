@@ -1,9 +1,16 @@
-import { Entity, Tree, Column, TreeChildren, TreeParent } from 'typeorm';
+import {
+  Entity,
+  Tree,
+  Column,
+  TreeChildren,
+  TreeParent,
+  PrimaryColumn,
+} from 'typeorm';
 
 @Entity()
 @Tree('closure-table')
 export class AnimalTreeEntity {
-  @Column()
+  @PrimaryColumn()
   id: string;
 
   @Column()

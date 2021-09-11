@@ -6,7 +6,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
 @Module({
-  /*imports: [
+  imports: [
     TypeOrmModule.forRoot({
       type: 'mysql',
       host: 'localhost',
@@ -18,7 +18,7 @@ import { AppService } from './app.service';
       synchronize: true,
     }),
     AnimalTreeModule,
-  ],*/
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
