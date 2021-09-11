@@ -1,4 +1,4 @@
-import { AnimalNode } from 'src/fake-database/interfaces/animal-node';
+import { AnimalNode } from 'src/utils/fake-database/interfaces/animal-node';
 
 export const data: AnimalNode = {
   id: '1',

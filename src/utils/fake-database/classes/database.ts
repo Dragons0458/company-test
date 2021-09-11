@@ -1,5 +1,5 @@
 import { HttpException } from '@nestjs/common';
-import { AnimalNode } from 'src/fake-database/interfaces/animal-node';
+import { AnimalNode } from 'src/utils/fake-database/interfaces/animal-node';
 import { v4 as uuidv4 } from 'uuid';
 
 export class Database {

@@ -1,4 +1,4 @@
-import { Node } from 'src/interfaces/node';
+import { Node } from 'src/utils/interfaces/node';
 
 export interface TreeNode {
   [id: string]: Node;

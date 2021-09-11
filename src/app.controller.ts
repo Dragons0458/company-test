@@ -7,10 +7,10 @@ import {
   Post,
   Put,
 } from '@nestjs/common';
-import { CreateNodeInput } from 'src/classes/create-node-input';
-import { FindIdParam } from 'src/classes/find-id-param';
-import { UpdateNodeInput } from 'src/classes/update-node-input';
-import { TreeNode } from 'src/interfaces/tree-node';
+import { CreateNodeInput } from 'src/utils/classes/create-node-input';
+import { FindIdParam } from 'src/utils/classes/find-id-param';
+import { UpdateNodeInput } from 'src/utils/classes/update-node-input';
+import { TreeNode } from 'src/utils/interfaces/tree-node';
 import { AppService } from './app.service';
 
 @Controller('/api/tree')

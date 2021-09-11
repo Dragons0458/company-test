@@ -1,4 +1,4 @@
-import { TreeNode } from 'src/interfaces/tree-node';
+import { TreeNode } from 'src/utils/interfaces/tree-node';
 
 export interface Node {
   label: string;

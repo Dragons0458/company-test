@@ -1,14 +1,22 @@
-import { HttpException, Injectable } from '@nestjs/common';
-import { CreateNodeInput } from 'src/classes/create-node-input';
-import { UpdateNodeInput } from 'src/classes/update-node-input';
-import { Database } from 'src/fake-database/classes/database';
-import { AnimalNode } from 'src/fake-database/interfaces/animal-node';
-import { Node } from 'src/interfaces/node';
-import { TreeNode } from 'src/interfaces/tree-node';
-import { databaseInstance } from 'src/fake-database';
+import {
+  BeforeApplicationShutdown,
+  HttpException,
+  Injectable,
+} from '@nestjs/common';
+import { AnimalTreeService } from 'src/animal-tree/animal-tree.service';
+import { CreateNodeInput } from 'src/utils/classes/create-node-input';
+import { UpdateNodeInput } from 'src/utils/classes/update-node-input';
+import { Database } from 'src/utils/fake-database/classes/database';
+import { data } from 'src/utils/fake-database/initial-data';
+import { AnimalNode } from 'src/utils/fake-database/interfaces/animal-node';
+import { Node } from 'src/utils/interfaces/node';
+import { TreeNode } from 'src/utils/interfaces/tree-node';
+import { databaseInstance } from 'src/utils/fake-database';
 
 @Injectable()
-export class AppService {
+export class AppService implements BeforeApplicationShutdown {
+  //constructor(private readonly animalTreeService: AnimalTreeService) {}
+
   private animalNodeToTreeNode(animalNode: AnimalNode): TreeNode {
     const node: Node = {
       label: animalNode.label,
@@ -54,5 +62,9 @@ export class AppService {
 
   updateNode(nodeId: string, updateNodeInput: UpdateNodeInput) {
     databaseInstance.updateParentNode(nodeId, updateNodeInput['current-id']);
+  }
+
+  async beforeApplicationShutdown(signal?: string) {
+    // await this.animalTreeService.insertData(databaseInstance.currentAnimalNode);
   }
 }
