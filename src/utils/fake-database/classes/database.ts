@@ -80,7 +80,7 @@ export class Database {
 
     currParentChildren.splice(currIndexNodeInChildren, 1);
 
-    const newParentNode = this.indexedParents.get(newParentId);
+    const newParentNode = this.indexedData.get(newParentId);
 
     this.indexedData.get(newParentId).children.push(currNodeInChildren);
     this.indexedParents.set(nodeId, newParentNode);
@@ -97,5 +97,8 @@ export class Database {
     );
 
     parentChildren.splice(indexNodeInChildren, 1);
+
+    this.indexedData.delete(nodeId);
+    this.indexedParents.delete(nodeId);
   }
 }
