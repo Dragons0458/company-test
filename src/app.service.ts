@@ -7,7 +7,6 @@ import { AnimalTreeService } from 'src/animal-tree/animal-tree.service';
 import { CreateNodeInput } from 'src/utils/classes/create-node-input';
 import { UpdateNodeInput } from 'src/utils/classes/update-node-input';
 import { Database } from 'src/utils/fake-database/classes/database';
-import { data } from 'src/utils/fake-database/initial-data';
 import { AnimalNode } from 'src/utils/fake-database/interfaces/animal-node';
 import { Node } from 'src/utils/interfaces/node';
 import { TreeNode } from 'src/utils/interfaces/tree-node';
